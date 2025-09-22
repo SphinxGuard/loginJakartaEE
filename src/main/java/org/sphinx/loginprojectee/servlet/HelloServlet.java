@@ -1,4 +1,4 @@
-package org.sphinx.loginprojectee;
+package org.sphinx.loginprojectee.servlet;
 
 import java.io.*;
 
