@@ -68,6 +68,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
