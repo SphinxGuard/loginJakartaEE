@@ -1,21 +1,20 @@
 package org.sphinx.loginprojectee.dao;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.sphinx.loginprojectee.model.User;
 import org.sphinx.loginprojectee.util.HibernateUtil;
 
-public class UserDAOImpl implements UserDAO {
-    @Override
-    public User findUserById(Long id) {
-        return null;
-    }
+public class UserHibernetDAOImpl implements UserDAO {
 
     @Override
     public User findUserByUsernameAndPassword(String username, String password) {
-        return null;
-    }
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.createQuery("from User where username = :username").setParameter("username", username).list();
 
-    @Override
-    public void addUser(User user) {
 
+        session.close();
+        return  null;
     }
 }
