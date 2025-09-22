@@ -18,10 +18,10 @@
       width: 300px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
     }
 
     .login-box h2 {
-      text-align: center;
       margin-bottom: 20px;
     }
 
@@ -34,7 +34,7 @@
       border-radius: 5px;
     }
 
-    .login-box input[type="submit"] {
+    .login-box .btn {
       width: 20%;
       padding: 10px;
       background-color: #006644;
@@ -43,24 +43,51 @@
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
+      margin: 5px;
     }
 
-    .login-box input[type="submit"]:hover {
+    .login-box .btn:hover {
       background-color: #004d33;
+    }
+    .login-box .btn2 {
+      width: 100%;
+      padding: 10px;
+      background-color: #006644;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .login-box .btn2:hover {
+      background-color: #004d33;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: space-between;
     }
   </style>
 </head>
 <body>
 
-  <div class="login-box">
-    <h2>Login</h2>
-    <form action="/login" method="post">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="submit" value="Login">
-    </form>
-  </div>
+<div class="login-box">
+  <h2>Login</h2>
+  <form action="/login" method="post">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <div class="button-row">
+      <input type="submit" class="btn" value="Login">
+  </form>
 
+  <!-- Registration form -->
+  <form action="/register" method="get">
+    <input type="submit" class="btn2" value="Register">
+  </form>
+</div>
+</div>
 
 </body>
 </html>
