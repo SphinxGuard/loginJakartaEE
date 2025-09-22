@@ -4,17 +4,23 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.sphinx.loginprojectee.model.User;
 import org.sphinx.loginprojectee.util.HibernateUtil;
+import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
+
+import java.util.List;
 
 public class UserHibernetDAOImpl implements UserDAO {
 
     @Override
-    public User findUserByUsernameAndPassword(String username, String password) {
+    public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.createQuery("from User where username = :username").setParameter("username", username).list();
-
-
+        List<User> userByUserNameList = session.createQuery("from User where username = :username").setParameter("username", username).list();
+        if (userByUserNameList.isEmpty()){
+            throw new UserNotFoundException("username:"+ username +"doesn't exist");
+        }
+        User user = (User) (userByUserNameList.get(0));
+        //to do incorrectPassword here
         session.close();
-        return  null;
+        return  user;
     }
 }
