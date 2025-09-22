@@ -24,7 +24,7 @@ public class UserTest {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         //deleting previous Datas in DB
-        session.createQuery("delete from User").executeUpdate();
+        session.createMutationQuery("delete from User").executeUpdate();
         //inserting managed datas in DB
         session.persist(ali);
         session.persist(sara);
@@ -59,11 +59,11 @@ public class UserTest {
 
     }
     @Test
-    void testFetchingIdOne(){
+    void testFetchingAndCheckingFirstPersonThatIsInsertedShouldReturnAliNejati(){
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        List<User> users = session.createQuery("from User").list();
+        List<User> users = session.createQuery("from User",User.class).list();
         User user = (User) users.get(0);
         transaction.commit();
 
