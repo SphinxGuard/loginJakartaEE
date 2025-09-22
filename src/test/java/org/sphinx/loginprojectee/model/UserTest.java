@@ -11,6 +11,28 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
+    @BeforeAll
+    public static void setupDatabase(){
+        // create 5 test users
+        User ali = new User("Ali", "Nejati", "AliNejati", "123", "aliNejati@gmail.com");
+        User sara = new User("Sara", "Ahmadi", "SaraAh", "123", "sara@gmail.com");
+        User reza = new User("Reza", "Karimi", "RezaK", "123", "reza@gmail.com");
+        User neda = new User("Neda", "Shahri", "NedaS", "123", "neda@gmail.com");
+        User omid = new User("Omid", "Moradi", "OmidM", "123", "omid@gmail.com");
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        //deleting previous Datas in DB
+        session.createQuery("delete from User").executeUpdate();
+        //inserting managed datas in DB
+        session.persist(ali);
+        session.persist(sara);
+        session.persist(reza);
+        session.persist(neda);
+        session.persist(omid);
+        transaction.commit();
+        session.close();
+    }
+
 
     @Test
     void testUser() {
