@@ -1,6 +1,7 @@
 package org.sphinx.loginprojectee.dao;
 
 import org.sphinx.loginprojectee.model.User;
+import org.sphinx.loginprojectee.util.HibernateUtil;
 
 public class UserDAOImpl implements UserDAO {
     @Override
