@@ -23,14 +23,19 @@ public class LoginProjectServlet extends HttpServlet {
 
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user;
+        User user = null;
         try {
             user = dao.findUserByUsernameAndPassword(request.getParameter("username"), request.getParameter("password"));
-        } catch (UserNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IncorrectPasswordException e) {
-            throw new RuntimeException(e);
         }
+        catch (UserNotFoundException | IncorrectPasswordException e) {
+            request.setAttribute("errorMessage", "Invalid username or password");
+            request.getRequestDispatcher("/WEB-INF/loginError.jsp").forward(request, response);
+        }
+        catch (Exception e) {
+            request.setAttribute("errorMessage", "Something went wrong");
+            request.getRequestDispatcher("/WEB-INF/loginError.jsp").forward(request, response);
+        }
+
         request.setAttribute("user",user);
         request.getRequestDispatcher("/WEB-INF/userProfile.jsp").forward(request, response);
 
