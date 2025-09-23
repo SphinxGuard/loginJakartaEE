@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
+import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
 import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 import org.sphinx.loginprojectee.util.HibernateUtil;
 
@@ -77,7 +78,7 @@ public class UserTest {
         assertEquals("aliNejati@gmail.com", user.getEmail());
     }
     @Test
-    void testFetchByUsernameShouldReturnAliNejatiUser() throws UserNotFoundException {
+    void testFetchByUsernameShouldReturnAliNejatiUser() throws UserNotFoundException, IncorrectPasswordException {
         UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
         User user = userHibernetDAOImpl.findUserByUsernameAndPassword("AliNejati", "123");
 
