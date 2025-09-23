@@ -40,6 +40,7 @@ public class UserTest {
     void testUser() {
         User user = new User("Ali", "Nejati", "AliNejati",
                 "123", "aliNejati@gmail.com");
+
         assertEquals("Ali", user.getFirstName());
         assertEquals("Nejati", user.getLastName());
         assertEquals("AliNejati", user.getUsername());
@@ -79,6 +80,7 @@ public class UserTest {
     void testFetchByUsernameShouldReturnAliNejatiUser() throws UserNotFoundException {
         UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
         User user = userHibernetDAOImpl.findUserByUsernameAndPassword("AliNejati", "123");
+
         assertEquals("Ali", user.getFirstName());
         assertEquals("Nejati", user.getLastName());
         assertEquals("AliNejati", user.getUsername());
