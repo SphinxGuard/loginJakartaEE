@@ -15,16 +15,27 @@ public class UserHibernetDAOImpl implements UserDAO {
     public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException, IncorrectPasswordException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        List<User> userByUserNameList = session.createQuery("from User where username = :username").setParameter("username", username).list();
-        if (userByUserNameList.isEmpty()){
-            throw new UserNotFoundException("username:"+ username +"doesn't exist");
-        }
-        User user = (User) (userByUserNameList.get(0));
+        try {
+            List<User> users = session.createQuery("from User where username = :username")
+                    .setParameter("username", username)
+                    .list();
 
-        if (!(user.getPassword().equals(password))){
-            throw new IncorrectPasswordException("password is incorrect");
+            if (users.isEmpty()) {
+                throw new UserNotFoundException("username: " + username + " doesn't exist");
+            }
+
+            User user = users.get(0);
+
+            if (!user.getPassword().equals(password)) {
+                throw new IncorrectPasswordException("password is incorrect");
+            }
+
+            transaction.commit();
+            return user;
+
+        } finally {
+            // Always close session, even if exception is thrown
+            session.close();
         }
-        session.close();
-        return  user;
     }
 }

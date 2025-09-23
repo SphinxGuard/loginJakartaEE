@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
+    //setup default Data in DB
     @BeforeAll
     public static void setupDatabase(){
         // create 5 test users
@@ -36,7 +37,7 @@ public class UserTest {
         session.close();
     }
 
-
+    //User constructor test
     @Test
     void testUser() {
         User user = new User("Ali", "Nejati", "AliNejati",
@@ -48,6 +49,7 @@ public class UserTest {
         assertEquals("123", user.getPassword());
         assertEquals("aliNejati@gmail.com", user.getEmail());
     }
+    //inserting user test
     @Test
     void testSessionFactory(){
         User ali = new User("Ali", "Nejati", "AliNejati",
@@ -60,6 +62,7 @@ public class UserTest {
         session.close();
 
     }
+    //fetching user test
     @Test
     void testFetchingAndCheckingFirstPersonThatIsInsertedShouldReturnAliNejati(){
         Session session = HibernateUtil.getSession();
@@ -77,6 +80,7 @@ public class UserTest {
         assertEquals("123", user.getPassword());
         assertEquals("aliNejati@gmail.com", user.getEmail());
     }
+    //UserHibernetDAOImpl tests
     @Test
     void testFetchByUsernameShouldReturnAliNejatiUser() throws UserNotFoundException, IncorrectPasswordException {
         UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
@@ -88,5 +92,18 @@ public class UserTest {
         assertEquals("123", user.getPassword());
         assertEquals("aliNejati@gmail.com", user.getEmail());
     }
+    @Test
+    void testFetchByUsernameShouldThrowUserNotFoundException() throws UserNotFoundException, IncorrectPasswordException {
+        UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
+        assertThrows(UserNotFoundException.class, () -> userHibernetDAOImpl.findUserByUsernameAndPassword("Naghi", "123"));
+    }
+    @Test
+    void testFetchByUsernameShouldThrowIncorrectPasswordException() throws UserNotFoundException, IncorrectPasswordException {
+        UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
+        assertThrows(IncorrectPasswordException.class, () -> userHibernetDAOImpl.findUserByUsernameAndPassword("SaraAh", "0000"));
+    }
+    //UserHibernetDAOImpl tests end
+
+
 
 }
