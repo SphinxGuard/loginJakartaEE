@@ -60,6 +60,8 @@
     <p><span class="label">Last Name:</span> ${requestScope.userDTO.lastName}</p>
     <p><span class="label">Email:</span> ${requestScope.userDTO.email}</p>
 <%--    <p><span class="label">Role:</span> ${requestScope.userDTO.role}</p> <!-- for future -->--%>
+    <%--    <p><span class="label">Role:</span> ${requestScope.userDTO.role}</p> <!-- for future -->--%>
+
 
     <form action="app/logout" method="post">
         <button type="submit" class="btn">Logout</button>
