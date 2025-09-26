@@ -36,7 +36,7 @@
         }
 
         .login-box .btn {
-            width: 20%;
+            width: 100%;
             padding: 10px;
             background-color: #006644;
             border: none;
@@ -52,7 +52,7 @@
         }
 
         .login-box .btn2 {
-            width: 100%;
+            width: 97%;
             padding: 10px;
             background-color: #006644;
             border: none;

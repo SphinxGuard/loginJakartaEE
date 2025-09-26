@@ -22,7 +22,13 @@
     }
 
     .login-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .login-box p.hint {
+      color: black;
       margin-bottom: 20px;
+      font-weight: bold;
     }
 
     .login-box input[type="text"],
@@ -49,6 +55,7 @@
     .login-box .btn:hover {
       background-color: #004d33;
     }
+
     .login-box .btn2 {
       width: 100%;
       padding: 10px;
@@ -75,18 +82,20 @@
 
 <div class="login-box">
   <h2>Login</h2>
-  <form action="app/login" method="post">
+  <p class="hint">Please enter username and password</p>
+
+  <form action="login" method="post">
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
     <div class="button-row">
       <input type="submit" class="btn" value="Login">
+    </div>
   </form>
 
   <!-- Registration form -->
   <form action="register.html" method="get">
-  <input type="submit" class="btn2" value="Register">
+    <input type="submit" class="btn2" value="Register">
   </form>
-</div>
 </div>
 
 </body>
