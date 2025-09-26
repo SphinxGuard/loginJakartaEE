@@ -54,9 +54,12 @@
 
 <div class="profile-box">
     <h2>User Profile</h2>
+
+    <p><span class="label">Username:</span> ${requestScope.userDTO.username}</p>
     <p><span class="label">First Name:</span> ${requestScope.userDTO.firstName}</p>
     <p><span class="label">Last Name:</span> ${requestScope.userDTO.lastName}</p>
     <p><span class="label">Email:</span> ${requestScope.userDTO.email}</p>
+<%--    <p><span class="label">Role:</span> ${requestScope.userDTO.role}</p> <!-- for future -->--%>
 
     <form action="app/logout" method="post">
         <button type="submit" class="btn">Logout</button>
