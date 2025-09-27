@@ -1,8 +1,25 @@
 package org.sphinx.loginprojectee.model;
 
 public enum Role {
-    //make sure you won't change the order of the roles
-    USER,//Ordinal or role number in DB = 0
-    ADMIN//Ordinal or role number in DB = 1
-    //new roles should be added here
+
+    USER("User"),
+    ADMIN("Admin");
+    private final String name;
+
+    Role(String name) {
+        this.name = name;
+    }
+    // getter for name
+    public String getName() {
+        return name;
+    }
+    public static Role fromRoleName(String name) {
+        for (Role r : Role.values()) {
+            if (r.name.equalsIgnoreCase(name)) {
+                return r;
+            }
+        }
+        throw new IllegalArgumentException("Unknown role name: " + name);
+    }
+
 }
