@@ -41,7 +41,7 @@
     }
 
     .login-box .btn {
-      width: 20%;
+      width: 100%;
       padding: 10px;
       background-color: #006644;
       border: none;
@@ -57,7 +57,7 @@
     }
 
     .login-box .btn2 {
-      width: 100%;
+      width: 97%;
       padding: 10px;
       background-color: #006644;
       border: none;
@@ -84,7 +84,7 @@
   <h2>Login</h2>
   <p class="hint">Please enter username and password</p>
 
-  <form action="login" method="post">
+  <form action="app/login" method="post">
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
     <div class="button-row">
