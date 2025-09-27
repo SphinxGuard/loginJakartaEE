@@ -10,6 +10,7 @@ import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
 import org.sphinx.loginprojectee.dto.UserProfileDTO;
 import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
 import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
+import org.sphinx.loginprojectee.model.Role;
 import org.sphinx.loginprojectee.model.User;
 
 @WebServlet( value = "/app/*")
@@ -38,17 +39,18 @@ public class FrontController extends HttpServlet {
             case "/logout":
                 logoutHandler(request, response);
                 break;
+            case "/register":
+                view = registerHandler(request, response);
+                break;
             default:
                 // If no handler matches, send 404
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
         }
-        if(view != null){
+        if(view != null) {
             // Apply prefix/suffix
             String jspPath = "/WEB-INF/" + view + ".jsp";
             request.getRequestDispatcher(jspPath).forward(request, response);
         }
-
-
     }
 
 
@@ -90,6 +92,29 @@ public class FrontController extends HttpServlet {
         response.sendRedirect("/loginProjectEE");
 
     }
+    private String registerHandler(HttpServletRequest request, HttpServletResponse response) {
 
+        String password = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        if (firstName == null || lastName == null || username == null ||
+                password == null || email == null) {
+            request.setAttribute("errorMessage", "All fields are required");
+            return "registerError";
+        }
+        if (!password.equals(request.getParameter("confirmPassword"))) {
+            request.setAttribute("errorMessage", "Passwords do not match");
+            return "registerError";
+        }
+        User user = new User(firstName, lastName, username, password, email, Role.USER);
+        UserProfileDTO userProfileDTO = UserProfileDTO.fromUser(user);
+        request.setAttribute("userProfileDTO",userProfileDTO);
+        UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.fromUser(user);
+        request.getSession().setAttribute("userAuthenticationDTO",userAuthenticationDTO);
+        dao.addUser(user);
+        return "userProfile";
+    }
 
 }
