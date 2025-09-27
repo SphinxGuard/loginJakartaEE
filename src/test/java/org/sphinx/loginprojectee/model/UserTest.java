@@ -1,10 +1,13 @@
 package org.sphinx.loginprojectee.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
+import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
 import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
 import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 import org.sphinx.loginprojectee.util.HibernateUtil;
@@ -105,5 +108,34 @@ public class UserTest {
     }
     //UserHibernetDAOImpl tests end
 
+    //lombok test start
+    @Test
+    public void givenAnnotatedUser_thenHasGettersAndSetters() {
+        TestLombok testLombok = new TestLombok();
+        testLombok.setFirstName("Test");
+        assertEquals(testLombok .getFirstName(), "Test");
+    }
 
+    @Getter
+    @Setter
+    class TestLombok {
+        private String firstName;
+    }
+    //lombok test end
+
+    @Test
+    void testAuthenticationDTOBuilder() {
+        Long expectedId = 42L;
+        Role expectedRole = Role.ADMIN;
+
+        // Use the builder to create the DTO
+        UserAuthenticationDTO dto = UserAuthenticationDTO.builder()
+                .id(expectedId)
+                .role(expectedRole)
+                .build();
+
+        // Verify that fields are set correctly
+        assertEquals(expectedId, dto.getId(), "ID should match the value set in builder");
+        assertEquals(expectedRole, dto.getRole(), "Role should match the value set in builder");
+    }
 }
