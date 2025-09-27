@@ -5,6 +5,7 @@ import java.io.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.hibernate.exception.ConstraintViolationException;
 import org.sphinx.loginprojectee.dao.UserHibernateDAOImpl;
 import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
 import org.sphinx.loginprojectee.dto.UserProfileDTO;
@@ -83,8 +84,7 @@ public class FrontController extends HttpServlet {
         return "userProfile";
 
     }
-    private void logoutHandler(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+    private void logoutHandler(HttpServletRequest request, HttpServletResponse response)throws IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
@@ -113,7 +113,17 @@ public class FrontController extends HttpServlet {
         request.setAttribute("userProfileDTO",userProfileDTO);
         UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.fromUser(user);
         request.getSession().setAttribute("userAuthenticationDTO",userAuthenticationDTO);
-        dao.addUser(user);
+        try {
+            dao.addUser(user);
+        }
+        catch (ConstraintViolationException e){
+            request.setAttribute("errorMessage", "Username or email already exists");
+            return "registerError";
+        }
+        catch (Exception e){
+            request.setAttribute("errorMessage", "Something went wrong");
+            return "registerError";
+        }
         return "userProfile";
     }
 

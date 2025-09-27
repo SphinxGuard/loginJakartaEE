@@ -20,7 +20,6 @@ public class User {
     @Getter
     @Setter
     private String password;
-    @Getter
     @Setter
     private String email;
     @Setter
@@ -39,6 +38,13 @@ public class User {
         this.lastName = lastName;
         this.role = role;
     }
+
+
+    @Column(unique = true)
+    public String getEmail() {
+        return email;
+    }
+
 
     @Enumerated(EnumType.STRING)
     public Role getRole() {
