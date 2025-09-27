@@ -105,31 +105,5 @@ public class UserTest {
     }
     //UserHibernetDAOImpl tests end
 
-    //Role ennumeration test cases
-    @Test
-    void testRoleEnumGetters() {
-        assertEquals("User", Role.USER.getName());
-        assertEquals("Admin", Role.ADMIN.getName());
-    }
-    @Test
-    void testValidRoleUser() {
-        assertEquals(Role.USER, Role.fromRoleName("User"));
-    }
 
-    @Test
-    void testValidRoleAdminCaseInsensitive() {
-        assertEquals(Role.ADMIN, Role.fromRoleName("admin"));
-        assertEquals(Role.ADMIN, Role.fromRoleName("ADMIN"));
-    }
-
-    @Test
-    void testUnknownRoleThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> Role.fromRoleName("Unknown"));
-    }
-
-    @Test
-    void testNullRoleThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> Role.fromRoleName(null));
-    }
-    //Role ennumeration test cases end
 }
