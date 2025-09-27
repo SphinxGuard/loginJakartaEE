@@ -60,7 +60,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    @Column(name="role_name")
     @Enumerated(EnumType.STRING)
     public Role getRole() {
         return role;
