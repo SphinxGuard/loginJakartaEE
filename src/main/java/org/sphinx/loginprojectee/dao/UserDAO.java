@@ -5,6 +5,8 @@ import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 import org.sphinx.loginprojectee.model.User;
 
 public interface UserDAO {
-    public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException, IncorrectPasswordException;
+    public User findUserByUsernameAndPassword(String username, String password)
+            throws UserNotFoundException, IncorrectPasswordException;
+    public void addUser(User user);
 
 }

@@ -9,10 +9,11 @@ import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 
 import java.util.List;
 
-public class UserHibernetDAOImpl implements UserDAO {
+public class UserHibernateDAOImpl implements UserDAO {
 
     @Override
-    public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException, IncorrectPasswordException {
+    public User findUserByUsernameAndPassword(String username, String password)
+            throws UserNotFoundException, IncorrectPasswordException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -38,4 +39,15 @@ public class UserHibernetDAOImpl implements UserDAO {
             session.close();
         }
     }
+
+    @Override
+    public void addUser(User user) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(user);
+        transaction.commit();
+        session.close();
+    }
+
+
 }

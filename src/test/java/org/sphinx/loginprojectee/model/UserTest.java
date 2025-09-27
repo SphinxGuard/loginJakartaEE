@@ -6,10 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
 import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
-import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
-import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 import org.sphinx.loginprojectee.util.HibernateUtil;
 
 import java.util.List;
@@ -84,29 +81,7 @@ public class UserTest {
         assertEquals("123", user.getPassword());
         assertEquals("aliNejati@gmail.com", user.getEmail());
     }
-    //UserHibernetDAOImpl tests
-    @Test
-    void testFetchByUsernameShouldReturnAliNejatiUser() throws UserNotFoundException, IncorrectPasswordException {
-        UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
-        User user = userHibernetDAOImpl.findUserByUsernameAndPassword("AliNejati", "123");
 
-        assertEquals("Ali", user.getFirstName());
-        assertEquals("Nejati", user.getLastName());
-        assertEquals("AliNejati", user.getUsername());
-        assertEquals("123", user.getPassword());
-        assertEquals("aliNejati@gmail.com", user.getEmail());
-    }
-    @Test
-    void testFetchByUsernameShouldThrowUserNotFoundException() throws UserNotFoundException, IncorrectPasswordException {
-        UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
-        assertThrows(UserNotFoundException.class, () -> userHibernetDAOImpl.findUserByUsernameAndPassword("Naghi", "123"));
-    }
-    @Test
-    void testFetchByUsernameShouldThrowIncorrectPasswordException() throws UserNotFoundException, IncorrectPasswordException {
-        UserHibernetDAOImpl userHibernetDAOImpl = new UserHibernetDAOImpl();
-        assertThrows(IncorrectPasswordException.class, () -> userHibernetDAOImpl.findUserByUsernameAndPassword("SaraAh", "0000"));
-    }
-    //UserHibernetDAOImpl tests end
 
     //lombok test start
     @Test

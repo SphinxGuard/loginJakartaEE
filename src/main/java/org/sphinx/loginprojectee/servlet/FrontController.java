@@ -5,7 +5,7 @@ import java.io.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
+import org.sphinx.loginprojectee.dao.UserHibernateDAOImpl;
 import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
 import org.sphinx.loginprojectee.dto.UserProfileDTO;
 import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
@@ -14,10 +14,10 @@ import org.sphinx.loginprojectee.model.User;
 
 @WebServlet( value = "/app/*")
 public class FrontController extends HttpServlet {
-    private UserHibernetDAOImpl dao;
+    private UserHibernateDAOImpl dao;
     @Override
     public void init(){
-       dao = new UserHibernetDAOImpl();
+       dao = new UserHibernateDAOImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
