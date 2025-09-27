@@ -35,6 +35,9 @@ public class FrontController extends HttpServlet {
             case "/login":
                 view = loginHandler(request, response);
                 break;
+            case "/logout":
+                logoutHandler(request, response);
+                break;
             default:
                 // If no handler matches, send 404
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
@@ -47,6 +50,8 @@ public class FrontController extends HttpServlet {
 
 
     }
+
+
 
     private String loginHandler(HttpServletRequest request, HttpServletResponse response) {
         User user = null;
@@ -74,6 +79,15 @@ public class FrontController extends HttpServlet {
         UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.fromUser(user);
         request.getSession().setAttribute("userAuthenticationDTO",userAuthenticationDTO);
         return "userProfile";
+
+    }
+    private void logoutHandler(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("/loginProjectEE");
 
     }
 

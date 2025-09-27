@@ -63,7 +63,7 @@
     <%--    <p><span class="label">Role:</span> ${requestScope.userProfileDTO.role}</p> <!-- for future -->--%>
 
 
-    <form action="app/logout" method="post">
+    <form action="logout" method="post">
         <button type="submit" class="btn">Logout</button>
     </form>
 </div>
