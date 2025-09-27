@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
+import org.sphinx.loginprojectee.dto.UserAuthenticationDTO;
 import org.sphinx.loginprojectee.dto.UserProfileDTO;
 import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
 import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
@@ -69,6 +70,10 @@ public class FrontController extends HttpServlet {
         }
         UserProfileDTO userProfileDTO = UserProfileDTO.fromUser(user);
         request.setAttribute("userProfileDTO",userProfileDTO);
+
+        UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.builder().id(user.getId())
+                        .role(user.getRole()).build();
+        request.getSession().setAttribute("userAuthenticationDTO",userAuthenticationDTO);
         return "userProfile";
 
     }
