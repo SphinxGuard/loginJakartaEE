@@ -13,6 +13,7 @@ public class User {
     private String password;
     private String email;
     private Role role;
+    private String roleName;
 
 
     //Constructors
@@ -26,6 +27,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.roleName = role.getName();
     }
 
     //getters and setters
@@ -60,13 +62,27 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    @Enumerated(EnumType.STRING)
     public Role getRole() {
+        if (role == null && roleName != null) {
+            role = Role.fromRoleName(roleName); // lazy conversion from DB string
+        }
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+        this.roleName = role.getName();
     }
+    @Column(name="role_name")
+    private String getRoleName() {
+        return roleName;
+    }
+
+    private void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
