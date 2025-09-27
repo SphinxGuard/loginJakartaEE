@@ -6,7 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.sphinx.loginprojectee.dao.UserHibernetDAOImpl;
-import org.sphinx.loginprojectee.dto.UserDTO;
+import org.sphinx.loginprojectee.dto.UserProfileDTO;
 import org.sphinx.loginprojectee.exceptions.IncorrectPasswordException;
 import org.sphinx.loginprojectee.exceptions.UserNotFoundException;
 import org.sphinx.loginprojectee.model.User;
@@ -67,8 +67,8 @@ public class FrontController extends HttpServlet {
             request.setAttribute("errorMessage", "Something went wrong");
             return "loginError";
         }
-        UserDTO userDTO = UserDTO.fromUser(user);
-        request.setAttribute("userDTO",userDTO);
+        UserProfileDTO userProfileDTO = UserProfileDTO.fromUser(user);
+        request.setAttribute("userProfileDTO",userProfileDTO);
         return "userProfile";
 
     }

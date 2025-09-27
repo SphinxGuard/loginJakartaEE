@@ -18,11 +18,11 @@ public class UserTest {
     @BeforeAll
     public static void setupDatabase(){
         // create 5 test users
-        User ali = new User("Ali", "Nejati", "AliNejati", "123", "aliNejati@gmail.com");
-        User sara = new User("Sara", "Ahmadi", "SaraAh", "123", "sara@gmail.com");
-        User reza = new User("Reza", "Karimi", "RezaK", "123", "reza@gmail.com");
-        User neda = new User("Neda", "Shahri", "NedaS", "123", "neda@gmail.com");
-        User omid = new User("Omid", "Moradi", "OmidM", "123", "omid@gmail.com");
+        User ali = new User("Ali", "Nejati", "AliNejati", "123", "aliNejati@gmail.com", Role.USER);
+        User sara = new User("Sara", "Ahmadi", "SaraAh", "123", "sara@gmail.com", Role.USER);
+        User reza = new User("Reza", "Karimi", "RezaK", "123", "reza@gmail.com", Role.USER);
+        User neda = new User("Neda", "Shahri", "NedaS", "123", "neda@gmail.com", Role.USER);
+        User omid = new User("Omid", "Moradi", "OmidM", "123", "omid@gmail.com", Role.USER);
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         //deleting previous Datas in DB
@@ -41,19 +41,20 @@ public class UserTest {
     @Test
     void testUser() {
         User user = new User("Ali", "Nejati", "AliNejati",
-                "123", "aliNejati@gmail.com");
+                "123", "aliNejati@gmail.com", Role.USER);
 
         assertEquals("Ali", user.getFirstName());
         assertEquals("Nejati", user.getLastName());
         assertEquals("AliNejati", user.getUsername());
         assertEquals("123", user.getPassword());
         assertEquals("aliNejati@gmail.com", user.getEmail());
+        assertEquals(Role.USER, user.getRole());
     }
     //inserting user test
     @Test
     void testSessionFactory(){
         User ali = new User("Ali", "Nejati", "AliNejati",
-                "123", "aliNejati@gmail.com");
+                "123", "aliNejati@gmail.com" , Role.USER);
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();

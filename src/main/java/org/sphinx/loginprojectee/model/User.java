@@ -12,18 +12,20 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private Role role;
 
-    //Comstructors
+
+    //Constructors
     private User (){
 
     }
-
-    public User (String firstName, String lastName, String username, String password, String email) {
+    public User (String firstName, String lastName, String username, String password, String email , Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     //getters and setters
@@ -57,6 +59,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

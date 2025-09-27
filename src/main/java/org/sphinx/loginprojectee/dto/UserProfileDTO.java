@@ -2,14 +2,14 @@ package org.sphinx.loginprojectee.dto;
 
 import org.sphinx.loginprojectee.model.User;
 
-public class UserDTO {
+public class UserProfileDTO {
     private String username;
     private String email;
     private String firstName;
     private String lastName;
     //private role
 
-    public UserDTO(String username, String email, String firstName, String lastName) {
+    public UserProfileDTO(String username, String email, String firstName, String lastName) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
@@ -48,8 +48,8 @@ public class UserDTO {
         this.lastName = lastName;
     }
 
-    public static UserDTO fromUser(User user) {
-        return new UserDTO(user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName());
+    public static UserProfileDTO fromUser(User user) {
+        return new UserProfileDTO(user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName());
     }
 }
 
