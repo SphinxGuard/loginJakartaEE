@@ -2,6 +2,7 @@ package org.sphinx.loginprojectee.dto;
 
 import lombok.*;
 import org.sphinx.loginprojectee.model.Role;
+import org.sphinx.loginprojectee.model.User;
 
 @Getter
 @Setter
@@ -12,4 +13,11 @@ import org.sphinx.loginprojectee.model.Role;
 public class UserAuthenticationDTO {
     private Long id;
     private Role role ;
+
+    public static UserAuthenticationDTO fromUser(User user){
+        return UserAuthenticationDTO.builder()
+                .id(user.getId())
+                .role(user.getRole())
+                .build();
+    }
 }

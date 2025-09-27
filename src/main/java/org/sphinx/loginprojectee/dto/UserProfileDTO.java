@@ -1,7 +1,15 @@
 package org.sphinx.loginprojectee.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.sphinx.loginprojectee.model.User;
 
+@Getter
+@Setter
+@Builder
+@ToString
 public class UserProfileDTO {
     private String username;
     private String email;
@@ -16,40 +24,10 @@ public class UserProfileDTO {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public static UserProfileDTO fromUser(User user) {
-        return new UserProfileDTO(user.getUsername(), user.getEmail(), user.getFirstName(), user.getLastName());
+        return UserProfileDTO.builder().username(user.getUsername()).email(user.getEmail())
+                .firstName(user.getFirstName()).lastName(user.getLastName()).build();
     }
 }
 

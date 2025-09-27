@@ -71,8 +71,7 @@ public class FrontController extends HttpServlet {
         UserProfileDTO userProfileDTO = UserProfileDTO.fromUser(user);
         request.setAttribute("userProfileDTO",userProfileDTO);
 
-        UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.builder().id(user.getId())
-                        .role(user.getRole()).build();
+        UserAuthenticationDTO userAuthenticationDTO = UserAuthenticationDTO.fromUser(user);
         request.getSession().setAttribute("userAuthenticationDTO",userAuthenticationDTO);
         return "userProfile";
 
