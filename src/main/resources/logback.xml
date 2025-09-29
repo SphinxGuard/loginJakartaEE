@@ -1,0 +1,23 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- Hibernate SQL -->
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+
+    <!-- Hibernate parameter values (Hibernate 5) -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+
+    <!-- Hibernate parameter values (Hibernate 6) -->
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE" />
+
+    <!-- Optional broader category -->
+    <logger name="org.hibernate.type" level="TRACE" />
+</configuration>

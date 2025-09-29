@@ -6,5 +6,9 @@
     <welcome-file-list>
         <welcome-file>static/login.html</welcome-file>
     </welcome-file-list>
+    <listener>
+        <listener-class>org.sphinx.loginprojectee.util.LogbackInitListener</listener-class>
+    </listener>
+
 
 </web-app>

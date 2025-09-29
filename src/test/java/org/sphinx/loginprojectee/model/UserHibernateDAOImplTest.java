@@ -18,6 +18,27 @@ public class UserHibernateDAOImplTest {
     public static void init(){
         userHibernateDAOImpl = new UserHibernateDAOImpl();
     }
+    @BeforeAll
+    public static void setupDatabase(){
+        // create 5 test users
+        User ali = new User("Ali", "Nejati", "AliNejati", "123", "aliNejati@gmail.com", Role.USER);
+        User sara = new User("Sara", "Ahmadi", "SaraAh", "123", "sara@gmail.com", Role.USER);
+        User reza = new User("Reza", "Karimi", "RezaK", "123", "reza@gmail.com", Role.USER);
+        User neda = new User("Neda", "Shahri", "NedaS", "123", "neda@gmail.com", Role.USER);
+        User omid = new User("Omid", "Moradi", "OmidM", "123", "omid@gmail.com", Role.USER);
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        //deleting previous Datas in DB
+        session.createMutationQuery("delete from User").executeUpdate();
+        //inserting managed datas in DB
+        session.persist(ali);
+        session.persist(sara);
+        session.persist(reza);
+        session.persist(neda);
+        session.persist(omid);
+        transaction.commit();
+        session.close();
+    }
 
 
     @Test
